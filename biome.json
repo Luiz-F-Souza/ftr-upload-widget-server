@@ -24,7 +24,7 @@
 		"formatter": {
 			"quoteStyle": "double",
 			"semicolons": "asNeeded",
-			"arrowParentheses": "asNeeded",
+			"arrowParentheses": "always",
 			"jsxQuoteStyle": "double",
 			"trailingCommas": "es5"
 		}
