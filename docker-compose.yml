@@ -4,8 +4,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=pg_user
-      - POSTGRES_PASSWORD=pg_password
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=upload
     volumes:
-      - "./docker:/docker-entrypoint-initdb.d"
+      - "./docker:/docker-entrypoint-init-db.d"
