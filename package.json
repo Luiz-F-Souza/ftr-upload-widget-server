@@ -5,13 +5,14 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"dev": "tsx watch --env-file .env src/infra/http/server.ts"
+		"dev": "tsx watch --env-file .env src/infra/http/server.ts",
+		"test": "dotenv -e .env.test -- vitest run",
+		"test:watch": "dotenv -e .env.test -- vitest"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"packageManager": "pnpm@10.33.3",
-
 	"dependencies": {
 		"@fastify/cors": "11.1.0",
 		"@fastify/multipart": "^10.0.0",
@@ -24,7 +25,10 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.16",
 		"@types/node": "^25.9.1",
+		"dotenv-cli": "^11.0.0",
 		"tsx": "^4.22.3",
-		"typescript": "^6.0.3"
+		"typescript": "^6.0.3",
+		"vite-tsconfig-paths": "^6.1.1",
+		"vitest": "^4.1.7"
 	}
 }
