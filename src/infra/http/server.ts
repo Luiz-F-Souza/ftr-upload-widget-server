@@ -10,6 +10,7 @@ import {
 	validatorCompiler,
 } from "fastify-type-provider-zod"
 import { uploadImageRoute } from "./routes/upload-image"
+import { transformSwaggerSchema } from "./transform-swagger-schema"
 
 const server = fastify()
 
@@ -30,7 +31,7 @@ server.setErrorHandler((error, _request, reply) => {
 server.register(fastifyMultipart)
 server.register(fastifySwagger, {
 	openapi: { info: { title: "Upload Widget API", version: "1.0.0" } },
-	transform: jsonSchemaTransform,
+	transform: transformSwaggerSchema,
 })
 server.register(fastifySwaggerUi, {
 	routePrefix: "/admin/docs",
