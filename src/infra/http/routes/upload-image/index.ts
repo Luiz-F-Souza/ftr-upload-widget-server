@@ -1,6 +1,7 @@
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod"
 import z from "zod"
 import { uploadImage } from "@/app/functions/upload-image"
+import { isLeft, unwrapEither } from "@/sharad/either"
 
 export const uploadImageRoute: FastifyPluginAsyncZod = async (server) => {
 	server.post(
@@ -35,11 +36,16 @@ export const uploadImageRoute: FastifyPluginAsyncZod = async (server) => {
 			// uploadedFile.file is a Readable stream, which allows us to process the file in chunks without loading the entire file into memory at once as buffer would do.
 			// Imagining 10k of users uploading 2MB files at the same time, if we use buffer, it would consume 20GB of memory, which is not efficient. Using stream allows us to handle such scenarios without running out of memory.
 
-			await uploadImage({
+			const result = await uploadImage({
 				fileName: uploadedFile.filename,
 				contentType: uploadedFile.mimetype,
 				contentStream: uploadedFile.file,
 			})
+
+			if (isLeft(result)) {
+				const error = unwrapEither(result)
+				return reply.status(400).send({ message: error.message, issues: [] })
+			}
 
 			reply.status(201).send({ uploadId: "12345" })
 		}

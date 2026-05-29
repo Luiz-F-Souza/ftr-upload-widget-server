@@ -2,6 +2,8 @@ import { Readable } from "node:stream"
 import z from "zod"
 import { db } from "@/infra/db"
 import { uploads } from "@/infra/db/schemas"
+import { Either, makeLeft, makeRight } from "@/sharad/either"
+import { InvalidFileFormat } from "../errors/invalid-file-format"
 
 const schema = z.object({
 	fileName: z.string(),
@@ -13,16 +15,20 @@ type Props = z.input<typeof schema>
 
 const allowedMimeTypes = ["image/jpeg", "image/png", "image/webp", "image/avif"]
 
-export async function uploadImage(props: Props) {
+export async function uploadImage(
+	props: Props
+): Promise<Either<InvalidFileFormat, { url: string }>> {
 	const { contentStream, contentType, fileName } = schema.parse(props)
 
 	if (!allowedMimeTypes.includes(contentType)) {
-		throw new Error("Invalid file type")
+		return makeLeft(new InvalidFileFormat())
 	}
 
 	await db.insert(uploads).values({
 		name: fileName,
 		remoteKey: "",
-    remoteUrl: "",
+		remoteUrl: "",
 	})
+
+	return makeRight({ url: "" })
 }
