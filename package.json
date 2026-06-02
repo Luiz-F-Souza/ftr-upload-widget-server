@@ -26,6 +26,7 @@
 		"@fastify/multipart": "^10.0.0",
 		"@fastify/swagger": "^9.7.0",
 		"@fastify/swagger-ui": "^5.2.6",
+		"dayjs": "^1.11.21",
 		"drizzle-orm": "^0.45.2",
 		"fastify": "^5.8.5",
 		"fastify-type-provider-zod": "^6.1.0",
@@ -35,6 +36,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.16",
+		"@faker-js/faker": "^10.4.0",
 		"@types/node": "^25.9.1",
 		"dotenv-cli": "^11.0.0",
 		"drizzle-kit": "^0.31.10",

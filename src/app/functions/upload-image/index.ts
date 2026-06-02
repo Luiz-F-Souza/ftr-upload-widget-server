@@ -3,7 +3,7 @@ import z from "zod"
 import { db } from "@/infra/db"
 import { uploads } from "@/infra/db/schemas"
 import { uploadFileToStorage } from "@/infra/storage/upload/file-to-storage"
-import { Either, makeLeft, makeRight } from "@/sharad/either"
+import { type Either, makeLeft, makeRight } from "@/sharad/either"
 import { InvalidFileFormat } from "../errors/invalid-file-format"
 
 const schema = z.object({
