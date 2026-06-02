@@ -9,6 +9,7 @@ import {
 	serializerCompiler,
 	validatorCompiler,
 } from "fastify-type-provider-zod"
+import { getUploadsRoute } from "./routes/get-uploads"
 import { uploadImageRoute } from "./routes/upload-image"
 import { transformSwaggerSchema } from "./transform-swagger-schema"
 
@@ -42,6 +43,7 @@ server.register(fastifyCors, {
 })
 
 server.register(uploadImageRoute)
+server.register(getUploadsRoute)
 
 server.listen({ port: 3333 }).then(() => {
 	console.log("Server is running on http://localhost:3333")
