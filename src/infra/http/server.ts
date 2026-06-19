@@ -5,10 +5,10 @@ import { fastifySwaggerUi } from "@fastify/swagger-ui"
 import { fastify } from "fastify"
 import {
 	hasZodFastifySchemaValidationErrors,
-	jsonSchemaTransform,
 	serializerCompiler,
 	validatorCompiler,
 } from "fastify-type-provider-zod"
+import { exportUploadsRoute } from "./routes/export-uploads"
 import { getUploadsRoute } from "./routes/get-uploads"
 import { uploadImageRoute } from "./routes/upload-image"
 import { transformSwaggerSchema } from "./transform-swagger-schema"
@@ -44,6 +44,7 @@ server.register(fastifyCors, {
 
 server.register(uploadImageRoute)
 server.register(getUploadsRoute)
+server.register(exportUploadsRoute)
 
 server.listen({ port: 3333 }).then(() => {
 	console.log("Server is running on http://localhost:3333")
