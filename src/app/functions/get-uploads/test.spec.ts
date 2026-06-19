@@ -107,7 +107,6 @@ describe("getUploads", () => {
 			sortDirection: "desc",
 		})
 
-		console.log({ upload1, upload2, upload3, upload4, upload5 })
 		expect(isRight(sut)).toBe(true)
 		expect(unwrapEither(sut).uploads).toEqual([
 			expect.objectContaining({ id: upload1.id }),
