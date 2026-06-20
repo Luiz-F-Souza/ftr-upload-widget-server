@@ -6,6 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "tsx watch --env-file .env src/infra/http/server.ts",
+		"build": "tsup-node",
 		"test": "dotenv -e .env.test -- vitest run",
 		"pretest": "pnpm run db:migrate:test",
 		"test:watch": "dotenv -e .env.test -- vitest",
@@ -41,6 +42,7 @@
 		"@types/node": "^25.9.1",
 		"dotenv-cli": "^11.0.0",
 		"drizzle-kit": "^0.31.10",
+		"tsup": "^8.5.1",
 		"tsx": "^4.22.3",
 		"typescript": "^6.0.3",
 		"vite-tsconfig-paths": "^6.1.1",
