@@ -6,6 +6,9 @@ on:
       - main
     types: [opened, reopened, labeled, unlabeled, synchronize]
 
+permissions:
+  contents: read
+
 jobs:
   run-ci:
     name: Run E2E Tests
@@ -17,22 +20,24 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: docker
-          POSTGRES_PASSWORD: docker
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
           POSTGRES_DB: upload_test
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U user -d upload_test"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 9
+          version: 10.33.3
           run_install: false
 
       - name: Install Node.js
